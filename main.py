@@ -9,5 +9,8 @@ socketio = SocketIO(app)
 
 @app.route("/", methodes=["POST", "GET"])
 
+def home():
+    return render_template("home.html")
+
 if __name__ == "__main__":
     socketio.run(app, debug=True)

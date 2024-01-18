@@ -7,5 +7,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "hjhjsdahhds"
 socketio = SocketIO(app)
 
+@app.route("/", methodes=["POST", "GET"])
+
 if __name__ == "__main__":
     socketio.run(app, debug=True)

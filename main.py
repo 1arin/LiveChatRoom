@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "hjhjsdahhds"
 socketio = SocketIO(app)
 
-@app.route("/", methodes=["POST", "GET"])
+@app.route("/", methods=["POST", "GET"])
 
 def home():
     # run html file called "home.html"

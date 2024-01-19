@@ -16,6 +16,9 @@ def home():
         join = request.form.get("join", False)
         create = request.form.get("create", False)
 
+        if not name:
+            return render_template("home.html", error="Please enter a nmae")
+
     # run html file called "home.html"
     return render_template("home.html")
 

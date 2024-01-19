@@ -15,5 +15,10 @@
         <button type="Submit" name="join">Join a Room</button>
     </div>
     <button type="submit" name="create" class="create-button">Create a Room"</button>
+    {% if error %}
+    <ul>
+        <li>{{if error}}</li>
+    </ul>
+    {% endif %}
 </form>
 {% endblock %}

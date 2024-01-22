@@ -37,6 +37,10 @@ def home():
         room = code
         if create != False:
             room = generate_unique_code(4)
+            room[room] = {"member: 0, messages": []}
+        elif code not in room:
+            return render_template("home.html", error="Room does not exist.")
+        
 
     # run html file called "home.html"
     return render_template("home.html")

@@ -15,7 +15,7 @@ def generate_unique_code(length):
         for _ in range(length):
             code += random.choice(ascii_uppercase)
         
-        if code not in room:
+        if code not in rooms:
             break
     
     return code
@@ -38,7 +38,7 @@ def home():
         room = code
         if create != False:
             room = generate_unique_code(4)
-            room[room] = {"member: 0, messages": []}
+            rooms[room] = {"member": 0, "messages": []}
         elif code not in room:
             return render_template("home.html", error="Room does not exist.", code=code , name=name)
         

@@ -21,8 +21,8 @@
     const messages = document.getElemenrById("messages")
 
     const CreatwMessages = (name, msg) => {
-        const content = '
-        <div>
+        const content = `
+        <div class="text">
             <span>
                 <strong>${name}</strong>: ${msg}
             </span>
@@ -30,11 +30,17 @@
                 ${new Date().toLocaleString()}
             </span>
         </div>
-        '
-    }
+        `;
+        .messages.innerHTML += content;
+    };
+
+    socketio.on("Message", (data) => {
+        CreatwMessages(data.name, data.message);
+    });
 
     const sendMessage = () => {
         console.log("send");
     };
+
 </script>
 {% endblock %}

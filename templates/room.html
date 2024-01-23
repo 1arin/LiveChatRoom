@@ -5,7 +5,7 @@
     <div class="inputs">
         <input
             type="text"
-            row="3"
+            rows="3"
             placeholder="Message"
             name="message"
             id="message"
@@ -18,9 +18,9 @@
 <script type="text/javascript">
     var socketio = io();
 
-    const messages = document.getElemenrById("messages")
+    const messages = document.getElementById("messages")
 
-    const CreatwMessages = (name, msg) => {
+    const creatwMessage = (name, msg) => {
         const content = `
         <div class="text">
             <span>
@@ -34,12 +34,15 @@
         .messages.innerHTML += content;
     };
 
-    socketio.on("Message", (data) => {
-        CreatwMessages(data.name, data.message);
+    socketio.on("message", (data) => {
+        createMessages(data.name, data.message);
     });
 
     const sendMessage = () => {
-        console.log("send");
+        const message = document.getElemenrById("message")
+        if (message.value == "") return;
+        socketio.emit("message", {data: message.value})
+        message.value = "";
     };
 
 </script>

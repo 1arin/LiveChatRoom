@@ -18,6 +18,21 @@
 <script type="text/javascript">
     var socketio = io();
 
+    const messages = document.getElemenrById("messages")
+
+    const CreatwMessages = (name, msg) => {
+        const content = '
+        <div>
+            <span>
+                <strong>${name}</strong>: ${msg}
+            </span>
+            <span class="muted">
+                ${new Date().toLocaleString()}
+            </span>
+        </div>
+        '
+    }
+
     const sendMessage = () => {
         console.log("send");
     };

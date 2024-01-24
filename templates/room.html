@@ -46,4 +46,8 @@
     };
 
 </script>
-{% endblock %}
+{% for messages %}
+    <script type="text"text/javascript>
+        createMessage("{{msg.name}}", "{{msg.message}}")
+    </script>
+{% endfor %} {% endblock %}

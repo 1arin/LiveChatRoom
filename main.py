@@ -57,6 +57,21 @@ def room():
 
     return render_template("room.html", code=room)
 
+@socketio.on("message")
+def message(data):
+    room = session.get("name")
+    if room not in rooms:
+        return
+    
+    content = {
+        "name": session.get("name"),
+        "message": data["data"]
+    }
+    send(content, to=room)
+    rooms[room]["message"].append(content)
+    print(f"{session.get('name')} said: {data['data']}")
+
+
 @socketio.on("connect")
 def connect(auth):
     room = session.get("room")

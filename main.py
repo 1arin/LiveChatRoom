@@ -60,7 +60,7 @@ def room():
 @socketio.on("connect")
 def connect(auth):
     room = session.get("room")
-    name = session.get("code")
+    name = session.get("name")
     if not room in rooms:
         return
     if room not in rooms:

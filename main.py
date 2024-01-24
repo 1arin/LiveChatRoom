@@ -57,5 +57,16 @@ def room():
 
     return render_template("room.html")
 
+@socketio.on("connect")
+def connect(auth):
+    room = session.get("room")
+    name = session.get("code")
+    if not room in rooms:
+        return
+    if room not in rooms:
+        leave_room(room)
+        return
+
+
 if __name__ == "__main__":
     socketio.run(app, debug=True)

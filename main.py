@@ -59,7 +59,7 @@ def room():
 
 @socketio.on("message")
 def message(data):
-    room = session.get("name")
+    room = session.get("room")
     if room not in rooms:
         return
     
@@ -68,7 +68,7 @@ def message(data):
         "message": data["data"]
     }
     send(content, to=room)
-    rooms[room]["message"].append(content)
+    rooms[room]["messages"].append(content)
     print(f"{session.get('name')} said: {data['data']}")
 
 

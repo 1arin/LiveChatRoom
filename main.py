@@ -1,9 +1,14 @@
 from flask import Flask, render_template, request, session, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import join_room, leave_room, send, SocketIO
 import random
 from string import ascii_uppercase
 
 app = Flask(__name__)
+# connect database
+db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URL'] = 'sqlite:///database.db'
+# 
 app.config["SECRET_KEY"] = "hjhjsdahhds"
 socketio = SocketIO(app)
 

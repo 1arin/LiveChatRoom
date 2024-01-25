@@ -1,6 +1,0 @@
-project_folder/
-|--- app.py
-|--- templates/
-     |--- main.html
-     |--- login.html
-     |--- register.html

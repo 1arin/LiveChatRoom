@@ -6,8 +6,8 @@ from string import ascii_uppercase
 
 app = Flask(__name__)
 # connect database
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
-app.config['SQLALCHEMY_DATABASE_URL'] = 'sqlite:///database.db'
 # 
 app.config["SECRET_KEY"] = "hjhjsdahhds"
 socketio = SocketIO(app)

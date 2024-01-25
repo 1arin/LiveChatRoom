@@ -9,6 +9,11 @@ socketio = SocketIO(app)
 
 rooms = {}
 
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+
 def generate_unique_code(length):
     while True:
         code = ""
@@ -20,7 +25,7 @@ def generate_unique_code(length):
     
     return code
 
-@app.route("/", methods=["POST", "GET"])
+@app.route("/home", methods=["POST", "GET"])
 def home():
     session.clear()
     if request.method == "POST":
@@ -101,6 +106,12 @@ def disconnect():
 
     send({"name": name, "message": "has lefted the room"}, to=room)
     print(f"{name} has left the room {room}")
+
+
+
+
+
+
 
 if __name__ == "__main__":
     socketio.run(app, debug=True)

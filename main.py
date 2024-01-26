@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import join_room, leave_room, send, SocketIO
+from flask_login import UserMixin
 import random
 from string import ascii_uppercase
 
@@ -8,9 +9,17 @@ app = Flask(__name__)
 # connect database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
+
+with app.app_context():
+    db.create_all()
 # 
 app.config["SECRET_KEY"] = "hjhjsdahhds"
 socketio = SocketIO(app)
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(20), nullable=False)
+    password = db.Column(db.String(80), nullable=False)
 
 rooms = {}
 
@@ -118,10 +127,6 @@ def disconnect():
 
     send({"name": name, "message": "has lefted the room"}, to=room)
     print(f"{name} has left the room {room}")
-
-
-
-
 
 
 

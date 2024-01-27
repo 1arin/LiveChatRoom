@@ -1,22 +1,21 @@
-/* Import fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
     height: 100vh;
-    background: url("space.jpg");
+    background: url('space.jpg');
     background-position: center;
     background-size: cover;
 }
 
 header {
-    position: fixed;
+    position:  fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -164,77 +163,6 @@ header .navbar {
     } 
 
     .hero-section .conten button {
-        padding: 9px 18px;
+        padding: 9px 18 px;
     }
-}
-
-/* Additional styling for your content section */
-.content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.join {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-}
-
-.create-button {
-    width: 100%;
-}
-
-.message-box {
-    border-color: black;
-    border-width: 2px;
-    border-style: solid;
-    border-radius: 10px;
-    background-color: whitesmoke;
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    width: 80vw;
-    align-items: stretch;
-}
-
-.messages {
-    overflow-y: scroll;
-    flex: 1;
-    width: 100%;
-}
-
-.inputs {
-    padding: 10px;
-    display: flex;    
-}
-
-h2 {
-    text-align: center;
-}
-
-#message {
-    flex: 1;
-}
-
-.text {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.muted {
-    font-size: 10px;
-    color: darkgrey;
 }

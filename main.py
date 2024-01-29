@@ -4,17 +4,12 @@ from flask_socketio import join_room, leave_room, send, SocketIO
 from flask_login import UserMixin
 import random
 from string import ascii_uppercase
+import bcrypt
 
 app = Flask(__name__)
-# connect database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-db = SQLAlchemy(app)
-
-with app.app_context():
-    db.create_all()
-# 
 app.config["SECRET_KEY"] = "hjhjsdahhds"
 socketio = SocketIO(app)
+
 
 rooms = {}
 
@@ -22,13 +17,16 @@ rooms = {}
 def main():
     return render_template("main.html")
 
-@app.route("/login")
-def login():
-    return render_template("login.html")
-
-@app.route("/register")
+@app.route("/register", methods=['GET','POST'])
 def register():
-    return render_template("register.html")
+
+    return render_template('register.html')
+
+
+@app.route("/login", methods=['GET','POST'])
+def login():
+    return render_template('login.html')
+ 
 
 def generate_unique_code(length):
     while True:

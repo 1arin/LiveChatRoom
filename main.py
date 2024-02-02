@@ -1,32 +1,17 @@
 from flask import Flask, render_template, request, session, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import join_room, leave_room, send, SocketIO
-from flask_login import UserMixin
 import random
 from string import ascii_uppercase
-import bcrypt
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "hjhjsdahhds"
 socketio = SocketIO(app)
-
 
 rooms = {}
 
 @app.route("/")
 def main():
     return render_template("main.html")
-
-@app.route("/register", methods=['GET','POST'])
-def register():
-
-    return render_template('register.html')
-
-
-@app.route("/login", methods=['GET','POST'])
-def login():
-    return render_template('login.html')
- 
 
 def generate_unique_code(length):
     while True:
@@ -39,8 +24,8 @@ def generate_unique_code(length):
     
     return code
 
-@app.route("/home", methods=["POST", "GET"])
-def home():
+@app.route("/joinroom", methods=["POST", "GET"])
+def joinroom():
     session.clear()
     if request.method == "POST":
         name = request.form.get("name")
@@ -49,30 +34,30 @@ def home():
         create = request.form.get("create", False)
 
         if not name:
-            return render_template("home.html", error="Please enter a name", code=code , name=name)
+            return render_template("joinroom.html", error="Please enter a name", code=code , name=name)
         
         if join != False and not code:
-            return render_template("home.html", error="Please enter a room code", code=code , name=name)
+            return render_template("joinroom.html", error="Please enter a room code", code=code , name=name)
         
         room = code
         if create != False:
             room = generate_unique_code(4)
             rooms[room] = {"members": 0, "messages": []}
         elif code not in rooms:
-            return render_template("home.html", error="Room does not exist.", code=code , name=name)
+            return render_template("joinroom.html", error="Room does not exist.", code=code , name=name)
         
         session["room"] = room
         session["name"] = name
         return redirect(url_for("room"))
 
     # run html file called "home.html"
-    return render_template("home.html")
+    return render_template("joinroom.html")
 
 @app.route("/room")
 def room():
     room = session.get("room")
     if room is None or session.get("name") is None or room not in rooms:
-        return redirect(url_for("home"))
+        return redirect(url_for("joinroom"))
 
     return render_template("room.html", code=room, message=rooms[room]["messages"])
 
@@ -90,6 +75,9 @@ def message(data):
     rooms[room]["messages"].append(content)
     print(f"{session.get('name')} said: {data['data']}")
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
 
 @socketio.on("connect")
 def connect(auth):
@@ -121,7 +109,13 @@ def disconnect():
     send({"name": name, "message": "has lefted the room"}, to=room)
     print(f"{name} has left the room {room}")
 
+@app.route("/register", methods=['GET','POST'])
+def register():
+    return render_template('register.html')
 
+@app.route("/login", methods=['GET','POST'])
+def login():
+    return render_template('login.html')
 
 if __name__ == "__main__":
     socketio.run(app, debug=True)

@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from flask_socketio import join_room, leave_room, send, SocketIO
 import random
 from string import ascii_uppercase
+from flask_login import UserMixin, login_user, LoginManager,login_required, logout_user, current_user
+
+
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "hjhjsdahhds"
@@ -9,6 +12,8 @@ socketio = SocketIO(app)
 
 rooms = {}
 
+# 
+#
 @app.route("/")
 def main():
     return render_template("main.html")

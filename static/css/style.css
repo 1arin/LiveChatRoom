@@ -153,16 +153,18 @@ header .navbar {
         text-align: center;
     }
 
-    .hero-section .conten :is(h1, p) {
+    .hero-section .content :is(h1, p) {
         max-width: 100%;  
     }
 
-    .hero-section .conten h1 {
+    .hero-section .content h1 {
         font-size: 2.3rem;
         line-height: 60px;
     } 
 
-    .hero-section .conten button {
+    .hero-section .content button {
         padding: 9px 18 px;
+
     }
 }
+

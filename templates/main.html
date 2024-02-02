@@ -15,7 +15,7 @@
                 <span id="close-btn" class="material-symbols-outlined">close</span>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">About us</a></li>
-                <li><a href="#">Contact us</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact us</a></li>
                 <li><a href="{{ url_for('login') }}">Login</a></li>
                 <li><a href="{{ url_for('register') }}">Register</a></li>
             </ul>
@@ -30,7 +30,10 @@
                     Step into the Galaxy of Real-Time Connection: Your Live Chat Oasis. Immerse yourself in dynamic conversations, connect instantly, 
                     and make every moment count in Your Personalized Chat Universe.
                 </p>
-                <button><a href="{{ url_for('login') }}">Join a Space Now</a></button>
+                <!-- <button><a href= "{{ url_for('login') }}">join me</a></button> -->
+                <a href="{{ url_for('login') }}">
+                    <button>Join Space</button>
+                  </a>
             </div>
         </section>
 

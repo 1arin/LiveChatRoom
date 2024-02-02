@@ -2,17 +2,31 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from flask_socketio import join_room, leave_room, send, SocketIO
 import random
 from string import ascii_uppercase
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 from flask_login import UserMixin, login_user, LoginManager,login_required, logout_user, current_user
 
 
 
 app = Flask(__name__)
+# add Database
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite;///users.db'
+# Secret Key
 app.config["SECRET_KEY"] = "hjhjsdahhds"
 socketio = SocketIO(app)
-
+db = SQLAlchemy(app)
 rooms = {}
 
-# 
+# Create Model
+class Users(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200), nullable=False)
+    password = db.Column(db.String(120), nullable=False, unigue=True)
+    date_added = db.Column(db.Datetime, default=datetime.utcnow)
+
+    #Create a string
+    def __repr__(self):
+        return '<Name %r>' % self.name
 #
 @app.route("/")
 def main():

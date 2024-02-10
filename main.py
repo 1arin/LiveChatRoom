@@ -22,10 +22,10 @@ class User(db.Model):
     def __init__(self,email,password,name):
         self.name = name
         self.email = email
-        self.password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+        self.password = bcrypt.generate_password_hash(password).decode('utf-8')
     
     def check_password(self,password):
-        return bcrypt.checkpw(password.encode('utf-8'),self.password.encode('utf-8'))
+        return bcrypt.check_password_hash(self.password, password)
 
 with app.app_context():
     db.create_all()
@@ -174,12 +174,12 @@ def dashboard():
         user = User.query.filter_by(email=session['email']).first()
         return render_template('dashboard.html',user=user)
     
-    return redirect('/log2')
+    return redirect(url_for('login'))
 
 @app.route('/logout')
 def logout():
     session.pop('email',None)
-    return redirect('/log2')
+    return redirect(url_for('login'))
 
 if __name__ == "__main__":
     socketio.run(app, debug=True)

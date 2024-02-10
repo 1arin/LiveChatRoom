@@ -5,29 +5,37 @@ from string import ascii_uppercase
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_login import UserMixin, login_user, LoginManager,login_required, logout_user, current_user
-
+import bcrypt
 
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+db = SQLAlchemy(app)
+app.secret_key = 'secret_key'
 # add Database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite;///users.db'
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), unique=True)
+    password = db.Column(db.String(100))
+
+    def __init__(self,email,password,name):
+        self.name = name
+        self.email = email
+        self.password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+    
+    def check_password(self,password):
+        return bcrypt.checkpw(password.encode('utf-8'),self.password.encode('utf-8'))
+
+with app.app_context():
+    db.create_all()
 # Secret Key
 app.config["SECRET_KEY"] = "hjhjsdahhds"
 socketio = SocketIO(app)
-db = SQLAlchemy(app)
+
 rooms = {}
 
-# Create Model
-class Users(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200), nullable=False)
-    password = db.Column(db.String(120), nullable=False, unigue=True)
-    date_added = db.Column(db.Datetime, default=datetime.utcnow)
 
-    #Create a string
-    def __repr__(self):
-        return '<Name %r>' % self.name
-#
 @app.route("/")
 def main():
     return render_template("main.html")
@@ -130,10 +138,17 @@ def disconnect():
 
 @app.route("/register", methods=['GET','POST'])
 def register():
+    if request.method == 'POST':
+        # handle request
+        pass
+
     return render_template('register.html')
 
 @app.route("/login", methods=['GET','POST'])
 def login():
+    if request.method == 'POST':
+        # handle request
+        pass
     return render_template('login.html')
 
 if __name__ == "__main__":

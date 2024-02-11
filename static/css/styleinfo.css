@@ -1,0 +1,30 @@
+body {
+  background-image: url('earth-1756274_1920.jpg');
+  background-size: cover;
+  height: 100vh;
+  }
+  
+.container {
+    background-color: whitesmoke;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px; 
+    padding: 20px;
+    width: 500px; 
+    max-width: 60%; 
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+h2 {
+    color: #333;
+    font-weight: bold;
+    font-family: "Roboto", sans-serif;
+    font-size: 24px;
+  }
+  
+p {
+    color: #666;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+  }

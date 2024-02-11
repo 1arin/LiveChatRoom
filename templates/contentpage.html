@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/stylecontentpage.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+    <div class="card">
+        <img src="static\css/aespa.jpg">
+        <div class="info">
+            <h1>aespa</h1>
+            <p>K-pop group with virtual avatars.</p>
+            <a href="{{url_for('aespa')}}" class="btn">Read more</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="static\css/f1.jpg">
+        <div class="info">
+            <h1>Formula 1</h1>
+            <p>Premier global auto racing series.</p>
+            <a href="{{url_for('f1')}}" class="btn">Read more</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="static\css/liver.jpg">
+        <div class="info">
+            <h1>Liverpool</h1>
+            <p>A legendary football club with a rich history and passionate supporters.</p>
+            <a href="{{url_for('liverpool')}}" class="btn">Read more</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,28 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Login page</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined:opsz,FILL,GRAD@24,400,0,0">
 </head>
-<body>
+    <body>
+        <header>
+            <nav class="navbar">
+            <a href="#" class="logo">Space<span>.</span></a>
+            <ul class="menu-link">
+                <span id="close-btn" class="material-symbols-outlined">close</span>
+                <li><a href="{{ url_for('main') }}">Home</a></li>
+                <li><a href="{{ url_for('content') }}">Content</a></li>
+                <li><a href="{{ url_for('userinfo') }}">User</a></li>
+                <li><a href="{{ url_for('logout') }}">Log out</a></li>
+            </ul>
+            <span id="menu-btn" class="material-symbols-outlined">menu</span>
+            </nav>
+        </header>
 
-<div class="container">
-    <div class=" row justify-content-center">
-        <div class="col-sm-8">
-            <h2>user dashboard</h2>
-            <p><b>Name: </b> {{user.name }}</p>
-            <p><b>Email: </b> {{user.email }}</p>
-            <a href="/logout" class="btn btn-dark">Logout</a>
-        </div>
+        <section class="hero-section">
+            <div class="content">
+                <h1>Welcome to Space</h1>
+                <p>
+                    Type a message, hit a button, and let the intergalactic chat begin!
+                <!-- <button><a href= "{{ url_for('login') }}">join me</a></button> -->
+                    <a href="{{ url_for('joinroom') }}"><br>
+                    <button>Join chat room NOW</button>
+                    </a>
+            </div>
+        </section>
 
-    </div>
-  
-</div>
-
-</body>
+        <script>
+            const header = document.querySelector("header");
+            const menuBtn = document.querySelector("#menu-btn");
+            const CloseBtn = document.querySelector("#close-btn");
+            
+            menuBtn.addEventListener("click", () => {
+                header.classList.toggle("show-mobile-menu");
+            });
+            
+            CloseBtn.addEventListener("click", () => {
+                menuBtn.click();
+            });
+        </script>
+    </body>
 </html>
+

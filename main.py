@@ -170,16 +170,40 @@ def login():
 
 @app.route('/dashboard')
 def dashboard():
-    if session['email']:
+    if 'email' in session: 
         user = User.query.filter_by(email=session['email']).first()
-        return render_template('dashboard.html',user=user)
+        return render_template('dashboard.html', user=user)
     
     return redirect(url_for('login'))
 
 @app.route('/logout')
 def logout():
-    session.pop('email',None)
+    session.pop('email', None)
     return redirect(url_for('login'))
+
+@app.route('/userinfo')
+def userinfo():
+    if 'email' in session:  
+        user = User.query.filter_by(email=session['email']).first()
+        return render_template('infomation.html', user=user)
+    
+    return redirect(url_for('login'))
+
+@app.route('/content')
+def content():
+    return render_template('contentpage.html')
+
+@app.route('/aespa')
+def aespa():
+    return render_template('aespa.html')
+
+@app.route('/Formula 1')
+def f1():
+    return render_template('f1.html')
+
+@app.route('/Liverpool')
+def liverpool():
+    return render_template('liverpool.html')
 
 if __name__ == "__main__":
     socketio.run(app, debug=True)

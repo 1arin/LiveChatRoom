@@ -1,3 +1,6 @@
+*** This is a prototype website for chatting with others using room codes. It is built using Flask framework and runs locally on localhost.*** 
+
+
 Space: There are 12 pages:
  - Main-
  - Contact Us
